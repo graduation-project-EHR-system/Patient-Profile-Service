@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\MedicalRecords.Service.Api.props" />
+</Project>

@@ -1,0 +1,12 @@
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\bin\Debug\net8.0\MedicalRecords.Service.Core.deps.json
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\bin\Debug\net8.0\MedicalRecords.Service.Core.dll
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\bin\Debug\net8.0\MedicalRecords.Service.Core.pdb
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\MedicalRecords.Service.Core.csproj.AssemblyReference.cache
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\MedicalRecords.Service.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\MedicalRecords.Service.Core.AssemblyInfoInputs.cache
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\MedicalRecords.Service.Core.AssemblyInfo.cs
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\MedicalRecords.Service.Core.csproj.CoreCompileInputs.cache
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\MedicalRecords.Service.Core.dll
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\refint\MedicalRecords.Service.Core.dll
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\MedicalRecords.Service.Core.pdb
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\ref\MedicalRecords.Service.Core.dll

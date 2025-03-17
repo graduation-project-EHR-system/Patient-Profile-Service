@@ -1,0 +1,15 @@
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\bin\Debug\net8.0\MedicalRecords.Service.Services.deps.json
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\bin\Debug\net8.0\MedicalRecords.Service.Services.dll
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\bin\Debug\net8.0\MedicalRecords.Service.Services.pdb
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\bin\Debug\net8.0\MedicalRecords.Service.Core.dll
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\bin\Debug\net8.0\MedicalRecords.Service.Core.pdb
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\obj\Debug\net8.0\MedicalRecords.Service.Services.csproj.AssemblyReference.cache
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\obj\Debug\net8.0\MedicalRecords.Service.Services.GeneratedMSBuildEditorConfig.editorconfig
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\obj\Debug\net8.0\MedicalRecords.Service.Services.AssemblyInfoInputs.cache
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\obj\Debug\net8.0\MedicalRecords.Service.Services.AssemblyInfo.cs
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\obj\Debug\net8.0\MedicalRecords.Service.Services.csproj.CoreCompileInputs.cache
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\obj\Debug\net8.0\MedicalR.7DBF490E.Up2Date
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\obj\Debug\net8.0\MedicalRecords.Service.Services.dll
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\obj\Debug\net8.0\refint\MedicalRecords.Service.Services.dll
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\obj\Debug\net8.0\MedicalRecords.Service.Services.pdb
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Services\obj\Debug\net8.0\ref\MedicalRecords.Service.Services.dll
