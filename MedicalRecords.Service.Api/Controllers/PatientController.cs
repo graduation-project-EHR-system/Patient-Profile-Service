@@ -11,7 +11,7 @@ namespace MedicalRecords.Service.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Doctor")]
     public class PatientController : ControllerBase
     {
         private readonly IPatientService _patientService;
