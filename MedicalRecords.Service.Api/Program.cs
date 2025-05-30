@@ -56,7 +56,7 @@ namespace MedicalRecords.Service.Api
 
             builder.Services.AddDbContext<MedicalRecordsDbContext>(opt =>
             {
-                opt.UseSqlServer(builder.Configuration.GetConnectionString("DefultConnection"));
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
             
