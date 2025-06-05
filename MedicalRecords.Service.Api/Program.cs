@@ -57,7 +57,7 @@ namespace MedicalRecords.Service.Api
 
             builder.Services.AddDbContext<MedicalRecordsDbContext>(opt =>
             {
-                opt.UseSqlServer(builder.Configuration.GetConnectionString("DefultConnection"));
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
             
@@ -86,11 +86,9 @@ namespace MedicalRecords.Service.Api
             }
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseHttpsRedirection();
