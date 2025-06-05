@@ -44,11 +44,11 @@ namespace MedicalRecords.Service.Core.DbContexts.Configuration
                 .HasMaxLength(50)
                 .HasColumnType("nvarchar(50)");
 
-            builder.Property(prop => prop.NationalID)
+            builder.Property(prop => prop.PhoneNumber)
                 .IsRequired()
-                .HasMaxLength(14)
-                .HasColumnType("char(14)")
-                .HasAnnotation("RegularExpression", "^[0-9]{14}$");
+                .HasMaxLength(11)
+                .HasColumnType("char(11)")
+                .HasAnnotation("RegularExpression", "^[0-9]{11}$");
 
 
             builder.Property(prop => prop.Email)

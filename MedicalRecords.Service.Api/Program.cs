@@ -1,4 +1,5 @@
 
+using MedicalRecords.Service.Api.Helper;
 using MedicalRecords.Service.Core.DbContexts;
 using MedicalRecords.Service.Core.Helper;
 using MedicalRecords.Service.Core.ServicesContract;
@@ -60,11 +61,11 @@ namespace MedicalRecords.Service.Api
             });
 
             
-
-
             builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
             builder.Services.AddScoped<IPatientService, PatientService>();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
+            builder.Services.Configure<ApiKeySettings>(builder.Configuration.GetSection("ApiKeySettings"));
+
 
             var app = builder.Build();
 

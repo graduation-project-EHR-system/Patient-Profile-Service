@@ -11,7 +11,7 @@ namespace MedicalRecords.Service.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "Doctor")]
+    
     public class PatientController : ControllerBase
     {
         private readonly IPatientService _patientService;
@@ -22,6 +22,7 @@ namespace MedicalRecords.Service.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Doctor")]
         public async Task<ActionResult<PatientDto>> CreatePatientAsync( [FromBody] PatientDto patientDto)
         {
             if (!ModelState.IsValid)
@@ -37,6 +38,7 @@ namespace MedicalRecords.Service.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [ApiKeyAuth]
         public async Task<ActionResult<PatientDto>> GetPatientAsync([FromRoute] Guid id)
         {
             if(id == Guid.Empty)
@@ -52,7 +54,7 @@ namespace MedicalRecords.Service.Api.Controllers
         }
 
         [HttpPut]
-
+        [Authorize(Roles = "Doctor")]
         public async Task<ActionResult<PatientDto>> UpdatePatientAsync([FromBody] PatientDto patientDto)
         {
             if (!ModelState.IsValid)
