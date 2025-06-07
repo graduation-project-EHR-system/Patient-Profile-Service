@@ -1,4 +1,3 @@
-
 using MedicalRecords.Service.Api.Helper;
 using MedicalRecords.Service.Core.DbContexts;
 using MedicalRecords.Service.Core.Helper;
@@ -22,6 +21,15 @@ namespace MedicalRecords.Service.Api
 
             // Add services to the container.
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
 
             builder.Services.AddAuthentication(option =>
             {
@@ -92,6 +100,8 @@ namespace MedicalRecords.Service.Api
 
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowAllOrigins");
 
             app.UseAuthentication();
             app.UseAuthorization();
