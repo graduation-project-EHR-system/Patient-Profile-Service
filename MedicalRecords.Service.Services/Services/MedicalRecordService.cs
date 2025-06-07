@@ -47,6 +47,22 @@ namespace MedicalRecords.Service.Services.Services
             return medicalRecordDto;
         }
 
+        public async Task<IEnumerable<MedicalRecordDto>> GetAllMedicalRecordForPatientByIdAsync(Guid id)
+        {
+            var medicalRecords = await _dbContext.MedicalRecords
+                .Include(prop => prop.Observations)
+                .Include(prop => prop.Conditions)
+                .Include(prop => prop.Medications)
+                .OrderByDescending(prop => prop.CreatedAt)
+                .Where(medicalRcord => medicalRcord.PatientId == id)
+                .ToListAsync();
+
+            var medicalRecordsDto =  _mapper.Map<IEnumerable<MedicalRecordDto>>(medicalRecords);
+
+            return medicalRecordsDto;
+
+        }
+
         public async Task<PaginationResponse> GetAllMedicalRecordsAsync(PaginationRequest paginationRequest)
         {
             var query = _dbContext.MedicalRecords
@@ -141,5 +157,7 @@ namespace MedicalRecords.Service.Services.Services
 
             return medicalRecordsDto;
         }
+
+
     }
 }

@@ -11,6 +11,7 @@ namespace MedicalRecords.Service.Core.ServicesContract
     {
         Task<PatientDto> CreatePatientAsync(PatientDto patientdto);
         Task<PatientDto> GetPatientByIdAsync(Guid id);
+        Task<IEnumerable<PatientDto>> GetAllPatientAsync();
         Task<PatientDto> UpdatePatientAsync(PatientDto patientdto);
     }
 }

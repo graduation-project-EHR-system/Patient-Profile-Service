@@ -87,5 +87,21 @@ namespace MedicalRecords.Service.Api.Controllers
             return Ok(new ResponseWithData<UpdateMedicalRecordDto>(200, result, "Medical Record Is Updated Successfully"));
         }
 
+
+        [HttpGet("get-all-medical-records-for-patient-by-Id/{id}")]
+        public async Task<ActionResult<IEnumerable<MedicalRecordDto>>> GetAllMedicalRecordsForPatientById([FromRoute] Guid id)
+        {
+
+            if (id == Guid.Empty)
+                return BadRequest(new ApiResponse(400, "Invalid ID"));
+
+            var result = await _medicalRecordService.GetAllMedicalRecordForPatientByIdAsync(id);
+
+            if (result is null)
+                return NotFound(new ApiResponse(404, "There Is No Medical Records For This Patient"));
+
+            return Ok(new ResponseWithData<IEnumerable<MedicalRecordDto>>(200, result, "Medical Records Is Retrived Successfully"));
+        }
+
     }
 }

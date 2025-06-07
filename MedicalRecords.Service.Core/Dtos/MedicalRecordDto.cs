@@ -9,7 +9,7 @@ namespace MedicalRecords.Service.Core.Dtos
 {
     public class MedicalRecordDto
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required(ErrorMessage = "Diagnosis is required.")]
         [StringLength(500, ErrorMessage = "Diagnosis must not exceed 500 characters.")]

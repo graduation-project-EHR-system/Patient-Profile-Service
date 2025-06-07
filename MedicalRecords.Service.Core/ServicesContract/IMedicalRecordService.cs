@@ -16,6 +16,7 @@ namespace MedicalRecords.Service.Core.ServicesContract
         public Task<PaginationResponse> GetAllMedicalRecordsAsync(PaginationRequest paginationRequest);
 
         public Task<MedicalRecordDto> GetMedicalRecordByIdAsync(Guid id);
+        public Task<IEnumerable<MedicalRecordDto>> GetAllMedicalRecordForPatientByIdAsync(Guid id);
         public Task<UpdateMedicalRecordDto> UpdateMedicalRecordAsync(UpdateMedicalRecordDto medicalRecordsDto);
     }
 }

@@ -10,3 +10,4 @@ E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\Me
 E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\refint\MedicalRecords.Service.Core.dll
 E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\MedicalRecords.Service.Core.pdb
 E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\ref\MedicalRecords.Service.Core.dll
+E:\GP\MedicalRecords.Service.Api\MedicalRecords.Service.Core\obj\Debug\net8.0\MedicalRecords.Service.Core.sourcelink.json

@@ -40,6 +40,7 @@ namespace MedicalRecords.Service.Services.Services
 
         }
 
+        
 
         public async Task<PatientDto> GetPatientByIdAsync(Guid id)
         {
@@ -80,5 +81,19 @@ namespace MedicalRecords.Service.Services.Services
 
             return patientdto;
         }
+
+        public async Task<IEnumerable<PatientDto>> GetAllPatientAsync()
+        {
+            var patients = _dbContext.Patients;
+
+            if (patients == null)
+                return null;
+
+           var patientsDto =  _mapper.Map<IEnumerable<PatientDto>>(patients);
+
+            return patientsDto;
+
+        }
+
     }
 }

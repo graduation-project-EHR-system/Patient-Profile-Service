@@ -72,5 +72,18 @@ namespace MedicalRecords.Service.Api.Controllers
 
         }
 
+        [HttpGet("get-all-patients")]
+        public async Task<ActionResult<IEnumerable<PatientDto>>> GetAllPatientAsync()
+        {
+
+            var patientDtos = await _patientService.GetAllPatientAsync();
+
+            if (patientDtos is null)
+                return NotFound(new ApiResponse(404, "There is no Patients yet!"));
+
+            return Ok(new ResponseWithData<IEnumerable<PatientDto>>(200, patientDtos, "Patient Is Retriverd Successfuly"));
+
+        }
+
     }
 }
