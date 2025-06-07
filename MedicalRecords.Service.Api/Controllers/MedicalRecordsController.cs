@@ -12,8 +12,8 @@ namespace MedicalRecords.Service.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Authorize(Roles = "Doctor, Admin")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(Roles = "Doctor, Admin")]
     public class MedicalRecordsController : ControllerBase
     {
         private readonly IMedicalRecordService _medicalRecordService;
@@ -40,7 +40,7 @@ namespace MedicalRecords.Service.Api.Controllers
         }
 
 
-        [HttpGet("get-all-medical-recors")]
+        [HttpGet("get-all-medical-records")]
         public async Task<ActionResult<ResponseWithAllMedicalRecordData>> GetAllMedicalRecords( [FromBody] PaginationRequest paginationRequest)
         {
             if (!ModelState.IsValid)
@@ -65,9 +65,9 @@ namespace MedicalRecords.Service.Api.Controllers
             var result = await _medicalRecordService.GetMedicalRecordByIdAsync(id);
 
             if (result is null)
-                return NotFound(new ApiResponse(400, "There Is No Medical medicalRecord For This ID"));
+                return Ok(new ResponseWithData<MedicalRecordDto>(200, null , "There Is No more Medical Records For This ID"));
 
-            return Ok(new ResponseWithData<MedicalRecordDto>(200, result, "Medical Record Is Retrived Successfully"));
+            return Ok(new ResponseWithData<MedicalRecordDto>(200, result, "Medical Records are Retrived Successfully"));
         }
 
         [HttpPut]
@@ -90,18 +90,18 @@ namespace MedicalRecords.Service.Api.Controllers
 
 
         [HttpGet("get-all-medical-records-for-patient-by-Id/{id}")]
-        public async Task<ActionResult<IEnumerable<MedicalRecordDto>>> GetAllMedicalRecordsForPatientById([FromRoute] Guid id)
+        public async Task<ActionResult<PaginationData>> GetAllMedicalRecordsForPatientById([FromRoute] Guid id, [FromBody] PaginationRequest paginationRequest)
         {
 
             if (id == Guid.Empty)
                 return BadRequest(new ApiResponse(400, "Invalid ID"));
 
-            var result = await _medicalRecordService.GetAllMedicalRecordForPatientByIdAsync(id);
+            var result = await _medicalRecordService.GetAllMedicalRecordForPatientByIdAsync(id, paginationRequest);
 
             if (result is null)
-                return NotFound(new ApiResponse(404, "There Is No Medical Records For This Patient"));
+                return Ok(new ResponseWithAllMedicalRecordData(200 , null, "There Is No Medical Records For This Patient"));
 
-            return Ok(new ResponseWithData<IEnumerable<MedicalRecordDto>>(200, result, "Medical Records Is Retrived Successfully"));
+            return Ok(new ResponseWithAllMedicalRecordData(200, result, "Medical Records Is Retrived Successfully"));
         }
 
     }

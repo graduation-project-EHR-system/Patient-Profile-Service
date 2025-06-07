@@ -2,6 +2,7 @@
 using MedicalRecords.Service.Core.DbContexts;
 using MedicalRecords.Service.Core.Dtos;
 using MedicalRecords.Service.Core.Entities;
+using MedicalRecords.Service.Core.Helper;
 using MedicalRecords.Service.Core.ServicesContract;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -82,16 +83,57 @@ namespace MedicalRecords.Service.Services.Services
             return patientdto;
         }
 
-        public async Task<IEnumerable<PatientDto>> GetAllPatientAsync()
+        public async Task<PaginationPatients> GetAllPatientAsync(PaginationRequest paginationRequest)
         {
-            var patients = _dbContext.Patients;
+          
+            var query = _dbContext.Patients
+                .OrderByDescending(prop => prop.CreatedAt);
 
-            if (patients == null)
+            int totalRecords = await query.CountAsync();
+
+            double last = totalRecords *1.0 / paginationRequest.PageSize;
+
+            int lastPage = Convert.ToInt32(Math.Ceiling(last));
+
+
+            var records = await query.
+                 Skip((paginationRequest.PageNumber - 1) * paginationRequest.PageSize)
+                .Take(paginationRequest.PageSize)
+                .Select(m => new PatientDto
+                {
+                    FirstName = m.FirstName,
+                    LastName = m.LastName,
+                    Email = m.Email,
+                    NationalID = m.NationalID,
+                    PhoneNumber = m.PhoneNumber,
+                    Address = m.Address,
+                    Age = m.Age,
+                    CreatedAt = m.CreatedAt,
+                    BloodType = m.BloodType,    
+                    DateOfBirth = m.DateOfBirth,
+                    Gender = m.Gender,
+                    Id = m.Id,
+                    MaritalStatus = m.MaritalStatus
+                })
+            .ToListAsync();
+
+            if (records.Count == 0 && totalRecords > 0)
                 return null;
 
-           var patientsDto =  _mapper.Map<IEnumerable<PatientDto>>(patients);
 
-            return patientsDto;
+            var meta = new PaginationResponseWithData
+            {
+                CurrentPage = paginationRequest.PageNumber,
+                PerPage = paginationRequest.PageSize,
+                LastPage = lastPage,
+                Total = totalRecords
+            };
+
+            return new PaginationPatients
+            {
+                Items = records,
+                Meta = meta
+            };
 
         }
 

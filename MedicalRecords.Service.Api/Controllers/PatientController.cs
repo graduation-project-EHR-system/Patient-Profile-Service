@@ -1,5 +1,6 @@
 ﻿using MedicalRecords.Service.Api.Response;
 using MedicalRecords.Service.Core.Dtos;
+using MedicalRecords.Service.Core.Helper;
 using MedicalRecords.Service.Core.ServicesContract;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +12,6 @@ namespace MedicalRecords.Service.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    
     public class PatientController : ControllerBase
     {
         private readonly IPatientService _patientService;
@@ -76,15 +76,15 @@ namespace MedicalRecords.Service.Api.Controllers
         }
 
         [HttpGet("get-all-patients")]
-        public async Task<ActionResult<IEnumerable<PatientDto>>> GetAllPatientAsync()
+        public async Task<ActionResult<PaginationPatients>> GetAllPatientAsync([FromBody] PaginationRequest paginationRequest)
         {
 
-            var patientDtos = await _patientService.GetAllPatientAsync();
+            var patientDtos = await _patientService.GetAllPatientAsync(paginationRequest);
 
             if (patientDtos is null)
                 return NotFound(new ApiResponse(404, "There is no Patients yet!"));
 
-            return Ok(new ResponseWithData<IEnumerable<PatientDto>>(200, patientDtos, "Patient Is Retriverd Successfuly"));
+            return Ok(new ResponseWithAllPatients(200, patientDtos, "Patient Is Retriverd Successfuly"));
 
         }
 

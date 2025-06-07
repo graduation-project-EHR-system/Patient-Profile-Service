@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MedicalRecords.Service.Services.Services
 {
@@ -48,20 +49,74 @@ namespace MedicalRecords.Service.Services.Services
             return medicalRecordDto;
         }
 
-        public async Task<IEnumerable<MedicalRecordDto>> GetAllMedicalRecordForPatientByIdAsync(Guid id)
+        public async Task<PaginationData> GetAllMedicalRecordForPatientByIdAsync(Guid id , PaginationRequest paginationRequest)
         {
-            var medicalRecords = await _dbContext.MedicalRecords
+            var query = _dbContext.MedicalRecords
                 .Include(prop => prop.Observations)
                 .Include(prop => prop.Conditions)
                 .Include(prop => prop.Medications)
                 .OrderByDescending(prop => prop.CreatedAt)
-                .Where(medicalRcord => medicalRcord.PatientId == id)
-                .ToListAsync();
+                .Where(p => p.PatientId == id);
 
-            var medicalRecordsDto =  _mapper.Map<IEnumerable<MedicalRecordDto>>(medicalRecords);
+            int totalRecords = await query.CountAsync();
 
-            return medicalRecordsDto;
+            double last = totalRecords * 1.0 / paginationRequest.PageSize;
 
+            int lastPage = Convert.ToInt32(Math.Ceiling(last));
+
+
+            var records = await query.
+                 Skip((paginationRequest.PageNumber - 1) * paginationRequest.PageSize)
+                .Take(paginationRequest.PageSize)
+                .Select(m => new MedicalRecordDto
+                {
+                    Id = m.Id,
+                    Diagnosis = m.Diagnosis,
+                    Notes = m.Notes,
+                    CreatedAt = m.CreatedAt,
+                    PatientId = m.PatientId,
+                    CachedDoctorId = m.CachedDoctorId,
+                    Medications = m.Medications.Select(med => new MedicationDto
+                    {
+                        Name = med.Name,
+                        Dosage = med.Dosage,
+                        Frequency = med.Frequency,
+                        DurationInDays = med.DurationInDays
+                    }).ToList(),
+                    Conditions = m.Conditions.Select(c => new ConditionDto
+                    {
+                        Code = c.Code,
+                        Description = c.Description,
+                        CreatedAt = c.CreatedAt
+                    }).ToList(),
+                    Observations = m.Observations.Select(o => new ObservationDto
+                    {
+                        TestName = o.TestName,
+                        Value = o.Value,
+                        Unit = o.Unit,
+                        CreatedAt = o.CreatedAt
+                    }).ToList()
+                })
+                
+            .ToListAsync();
+
+            if (records.Count == 0 && totalRecords > 0)
+                return null;
+
+
+            var meta = new PaginationResponseWithData
+            {
+                CurrentPage = paginationRequest.PageNumber,
+                PerPage = paginationRequest.PageSize,
+                LastPage = lastPage,
+                Total = totalRecords
+            };
+
+            return new PaginationData
+            {
+                Items = records,
+                Meta = meta
+            };
         }
 
         public async Task<PaginationData> GetAllMedicalRecordsAsync(PaginationRequest paginationRequest)
@@ -74,7 +129,7 @@ namespace MedicalRecords.Service.Services.Services
 
             int totalRecords = await query.CountAsync();
 
-            double last = totalRecords / paginationRequest.PageSize;
+            double last = totalRecords * 1.0 / paginationRequest.PageSize;
 
             int lastPage = Convert.ToInt32( Math.Ceiling( last ) );
 

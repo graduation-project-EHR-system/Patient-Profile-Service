@@ -1,4 +1,5 @@
 ﻿using MedicalRecords.Service.Core.Dtos;
+using MedicalRecords.Service.Core.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace MedicalRecords.Service.Core.ServicesContract
     {
         Task<PatientDto> CreatePatientAsync(PatientDto patientdto);
         Task<PatientDto> GetPatientByIdAsync(Guid id);
-        Task<IEnumerable<PatientDto>> GetAllPatientAsync();
+        Task<PaginationPatients> GetAllPatientAsync(PaginationRequest paginationRequest);
         Task<PatientDto> UpdatePatientAsync(PatientDto patientdto);
     }
 }
