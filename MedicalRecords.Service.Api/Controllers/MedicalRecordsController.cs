@@ -1,4 +1,5 @@
 ﻿using MedicalRecords.Service.Api.Response;
+using MedicalRecords.Service.Core;
 using MedicalRecords.Service.Core.Dtos;
 using MedicalRecords.Service.Core.Helper;
 using MedicalRecords.Service.Core.ServicesContract;
@@ -39,8 +40,8 @@ namespace MedicalRecords.Service.Api.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<PaginationResponse>> GetAllMedicalRecords(PaginationRequest paginationRequest)
+        [HttpGet("get-all-medical-recors")]
+        public async Task<ActionResult<ResponseWithAllMedicalRecordData>> GetAllMedicalRecords( [FromBody] PaginationRequest paginationRequest)
         {
             if (!ModelState.IsValid)
                 return BadRequest(new ResponseWithData<PaginationRequest>(400, paginationRequest, "Invalid Model"));

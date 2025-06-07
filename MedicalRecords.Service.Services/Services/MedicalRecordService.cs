@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Azure.Core;
+using MedicalRecords.Service.Core;
 using MedicalRecords.Service.Core.DbContexts;
 using MedicalRecords.Service.Core.Dtos;
 using MedicalRecords.Service.Core.Entities;
@@ -63,7 +64,7 @@ namespace MedicalRecords.Service.Services.Services
 
         }
 
-        public async Task<PaginationResponse> GetAllMedicalRecordsAsync(PaginationRequest paginationRequest)
+        public async Task<PaginationData> GetAllMedicalRecordsAsync(PaginationRequest paginationRequest)
         {
             var query = _dbContext.MedicalRecords
                 .Include(prop => prop.Observations)
@@ -72,6 +73,11 @@ namespace MedicalRecords.Service.Services.Services
                 .OrderByDescending(prop => prop.CreatedAt);
 
             int totalRecords = await query.CountAsync();
+
+            double last = totalRecords / paginationRequest.PageSize;
+
+            int lastPage = Convert.ToInt32( Math.Ceiling( last ) );
+
 
             var records = await query.
                  Skip((paginationRequest.PageNumber - 1) * paginationRequest.PageSize)
@@ -111,13 +117,18 @@ namespace MedicalRecords.Service.Services.Services
                 return null;
 
 
-            return new PaginationResponse
+            var meta = new PaginationResponseWithData
             {
-                PageNumber = paginationRequest.PageNumber,
-                PageSize = paginationRequest.PageSize,
-                TotalRecords = totalRecords,
-                TotalPages = (int)Math.Ceiling(totalRecords / (double)paginationRequest.PageSize),
-                MedicalRecord = records
+                CurrentPage = paginationRequest.PageNumber,
+                PerPage = paginationRequest.PageSize,
+                LastPage = lastPage ,
+                Total = totalRecords
+            };
+
+            return new PaginationData
+            {
+                Items = records,
+                Meta = meta
             };
         }
 

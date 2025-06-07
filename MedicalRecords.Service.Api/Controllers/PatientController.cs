@@ -10,7 +10,7 @@ namespace MedicalRecords.Service.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
     
     public class PatientController : ControllerBase
     {
@@ -23,6 +23,7 @@ namespace MedicalRecords.Service.Api.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Doctor")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<PatientDto>> CreatePatientAsync( [FromBody] PatientDto patientDto)
         {
             if (!ModelState.IsValid)
@@ -55,6 +56,8 @@ namespace MedicalRecords.Service.Api.Controllers
 
         [HttpPut]
         [Authorize(Roles = "Doctor")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         public async Task<ActionResult<PatientDto>> UpdatePatientAsync([FromBody] PatientDto patientDto)
         {
             if (!ModelState.IsValid)
