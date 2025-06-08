@@ -76,7 +76,7 @@ namespace MedicalRecords.Service.Api.Controllers
         }
 
         [HttpGet("get-all-patients")]
-        public async Task<ActionResult<PaginationPatients>> GetAllPatientAsync([FromBody] PaginationRequest paginationRequest)
+        public async Task<ActionResult<PaginationPatients>> GetAllPatientAsync([FromQuery] PaginationRequest paginationRequest)
         {
 
             var patientDtos = await _patientService.GetAllPatientAsync(paginationRequest);
