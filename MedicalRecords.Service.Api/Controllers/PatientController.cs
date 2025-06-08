@@ -22,7 +22,7 @@ namespace MedicalRecords.Service.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Doctor")]
+        [Authorize(Roles = "Doctor,Admin")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<PatientDto>> CreatePatientAsync( [FromBody] PatientDto patientDto)
         {
