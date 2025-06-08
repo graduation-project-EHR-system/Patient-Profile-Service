@@ -41,7 +41,7 @@ namespace MedicalRecords.Service.Api.Controllers
 
 
         [HttpGet("get-all-medical-records")]
-        public async Task<ActionResult<ResponseWithAllMedicalRecordData>> GetAllMedicalRecords( [FromBody] PaginationRequest paginationRequest)
+        public async Task<ActionResult<ResponseWithAllMedicalRecordData>> GetAllMedicalRecords( [FromQuery] PaginationRequest paginationRequest)
         {
             if (!ModelState.IsValid)
                 return BadRequest(new ResponseWithData<PaginationRequest>(400, paginationRequest, "Invalid Model"));
@@ -90,7 +90,7 @@ namespace MedicalRecords.Service.Api.Controllers
 
 
         [HttpGet("get-all-medical-records-for-patient-by-Id/{id}")]
-        public async Task<ActionResult<PaginationData>> GetAllMedicalRecordsForPatientById([FromRoute] Guid id, [FromBody] PaginationRequest paginationRequest)
+        public async Task<ActionResult<PaginationData>> GetAllMedicalRecordsForPatientById([FromRoute] Guid id, [FromQuery] PaginationRequest paginationRequest)
         {
 
             if (id == Guid.Empty)
