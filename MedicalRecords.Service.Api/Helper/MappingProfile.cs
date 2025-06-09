@@ -65,11 +65,9 @@ namespace MedicalRecords.Service.Core.Helper
 
 
 
-            CreateMap<LookUpPatients, PatientDto>()
+            CreateMap<PatientDto, LookUpPatients>()
                 .ForMember(dest => dest.Id, prop => prop.MapFrom(src => src.Id))
-                .ForMember(dest => dest.FirstName, prop => prop.MapFrom(src => src.FirstName))
-                .ForMember(dest => dest.LastName, prop => prop.MapFrom(src => src.LastName))
-                .ReverseMap();
+                .ForMember(dest => dest.FullName, prop => prop.MapFrom(src => src.FirstName + " " + src.LastName));
         }
     }
 }
