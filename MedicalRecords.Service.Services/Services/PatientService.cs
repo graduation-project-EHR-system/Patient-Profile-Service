@@ -137,5 +137,18 @@ namespace MedicalRecords.Service.Services.Services
 
         }
 
+
+        public async Task<IEnumerable<LookUpPatients>> GetAllPatientAsync()
+        {
+
+            var patients = _dbContext.Patients;
+
+            var patientsDto = _mapper.Map<IEnumerable<PatientDto>>(patients);
+
+            var lookUpPatient = _mapper.Map<IEnumerable<LookUpPatients>>(patientsDto);
+
+            return lookUpPatient;
+        }
+
     }
 }

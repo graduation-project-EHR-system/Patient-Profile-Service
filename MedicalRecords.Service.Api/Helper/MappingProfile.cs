@@ -62,6 +62,14 @@ namespace MedicalRecords.Service.Core.Helper
                 .ForMember(dest => dest.DateOfBirth, prop => prop.MapFrom(src => src.DateOfBirth))
                 .ForMember(dest => dest.CreatedAt, prop => prop.MapFrom(src => src.CreatedAt))
                 .ReverseMap();
+
+
+
+            CreateMap<LookUpPatients, PatientDto>()
+                .ForMember(dest => dest.Id, prop => prop.MapFrom(src => src.Id))
+                .ForMember(dest => dest.FirstName, prop => prop.MapFrom(src => src.FirstName))
+                .ForMember(dest => dest.LastName, prop => prop.MapFrom(src => src.LastName))
+                .ReverseMap();
         }
     }
 }
