@@ -1,4 +1,5 @@
 using MedicalRecords.Service.Api.Helper;
+using MedicalRecords.Service.Api.Middlewares;
 using MedicalRecords.Service.Core.DbContexts;
 using MedicalRecords.Service.Core.Helper;
 using MedicalRecords.Service.Core.ServicesContract;
@@ -108,6 +109,8 @@ namespace MedicalRecords.Service.Api
             app.UseSwaggerUI();
 
             app.UseMiddleware<ExceptionMiddleware>();
+            app.UseMiddleware<TokenOrApiKeyAuthMiddleware>();
+
             app.UseHttpsRedirection();
 
             app.UseCors("AllowAllOrigins");

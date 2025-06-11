@@ -39,7 +39,6 @@ namespace MedicalRecords.Service.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        [ApiKeyAuth]
         public async Task<ActionResult<PatientDto>> GetPatientAsync([FromRoute] Guid id)
         {
             if(id == Guid.Empty)
