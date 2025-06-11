@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "KuMZCMedjwQ=",
+  "dgSpecHash": "dIPF2UGloV8=",
   "success": true,
   "projectFilePath": "E:\\GP\\MedicalRecords.Service.Api\\MedicalRecords.Service.Core\\MedicalRecords.Service.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\badry.anas\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\badry.anas\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
+    "C:\\Users\\badry.anas\\.nuget\\packages\\confluent.kafka\\2.9.0\\confluent.kafka.2.9.0.nupkg.sha512",
+    "C:\\Users\\badry.anas\\.nuget\\packages\\librdkafka.redist\\2.8.0\\librdkafka.redist.2.8.0.nupkg.sha512",
     "C:\\Users\\badry.anas\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\badry.anas\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\badry.anas\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.6\\microsoft.data.sqlclient.5.1.6.nupkg.sha512",

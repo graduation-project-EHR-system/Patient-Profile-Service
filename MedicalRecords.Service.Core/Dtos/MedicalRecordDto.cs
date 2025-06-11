@@ -23,8 +23,6 @@ namespace MedicalRecords.Service.Core.Dtos
         [Required(ErrorMessage = "Patient ID is required.")]
         public Guid PatientId { get; set; }
 
-        [Required(ErrorMessage = "Doctor ID is required.")]
-        public Guid CachedDoctorId { get; set; }
 
         public ICollection<MedicationDto> Medications { get; set; } = new List<MedicationDto>();
         public ICollection<ConditionDto> Conditions { get; set; } = new List<ConditionDto>();

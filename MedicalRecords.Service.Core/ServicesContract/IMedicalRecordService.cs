@@ -18,5 +18,10 @@ namespace MedicalRecords.Service.Core.ServicesContract
         public Task<MedicalRecordDto> GetMedicalRecordByIdAsync(Guid id);
         public Task<PaginationData> GetAllMedicalRecordForPatientByIdAsync(Guid id, PaginationRequest paginationRequest);
         public Task<UpdateMedicalRecordDto> UpdateMedicalRecordAsync(UpdateMedicalRecordDto medicalRecordsDto);
+
+
+        Task<CachedDoctor> HandleUserCreatedEventAsync(KafkaUserEvent userEvent);
+        Task<CachedDoctor> HandleUserUpdatedAsync(KafkaUserEvent userEvent);
+        Task<bool> HandleUserDeletedAsync(KafkaUserEvent userEvent);
     }
 }

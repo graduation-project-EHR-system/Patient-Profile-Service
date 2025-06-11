@@ -4,6 +4,7 @@ using MedicalRecords.Service.Core.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalRecords.Service.Core.DbContexts.Migrations
 {
     [DbContext(typeof(MedicalRecordsDbContext))]
-    partial class MedicalRecordsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250611150108_Delete Specilization For Doctor")]
+    partial class DeleteSpecilizationForDoctor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,6 +80,9 @@ namespace MedicalRecords.Service.Core.DbContexts.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CachedDoctorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -96,6 +102,8 @@ namespace MedicalRecords.Service.Core.DbContexts.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CachedDoctorId");
 
                     b.HasIndex("PatientId");
 
@@ -254,11 +262,19 @@ namespace MedicalRecords.Service.Core.DbContexts.Migrations
 
             modelBuilder.Entity("MedicalRecords.Service.Core.Entities.MedicalRecord", b =>
                 {
+                    b.HasOne("MedicalRecords.Service.Core.Entities.CachedDoctor", "CachedDoctor")
+                        .WithMany("MedicalRecords")
+                        .HasForeignKey("CachedDoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MedicalRecords.Service.Core.Entities.Patient", "Patient")
                         .WithMany("MedicalRecords")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CachedDoctor");
 
                     b.Navigation("Patient");
                 });
@@ -283,6 +299,11 @@ namespace MedicalRecords.Service.Core.DbContexts.Migrations
                         .IsRequired();
 
                     b.Navigation("MedicalRecord");
+                });
+
+            modelBuilder.Entity("MedicalRecords.Service.Core.Entities.CachedDoctor", b =>
+                {
+                    b.Navigation("MedicalRecords");
                 });
 
             modelBuilder.Entity("MedicalRecords.Service.Core.Entities.MedicalRecord", b =>

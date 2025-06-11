@@ -37,7 +37,6 @@ namespace MedicalRecords.Service.Core.Helper
                 .ReverseMap();
 
             CreateMap<MedicalRecordDto, MedicalRecord>()
-                .ForMember(dest => dest.CachedDoctorId, obt => obt.MapFrom(src => src.CachedDoctorId))
                 .ForMember(dest => dest.PatientId, obt => obt.MapFrom(src => src.PatientId))
                 .ForMember(dest => dest.CreatedAt, obt => obt.MapFrom(src => src.CreatedAt))
                 .ForMember(dest => dest.Conditions, obt => obt.MapFrom(src => src.Conditions))

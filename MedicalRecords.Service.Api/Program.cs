@@ -2,10 +2,12 @@ using MedicalRecords.Service.Api.Helper;
 using MedicalRecords.Service.Core.DbContexts;
 using MedicalRecords.Service.Core.Helper;
 using MedicalRecords.Service.Core.ServicesContract;
+using MedicalRecords.Service.Services;
 using MedicalRecords.Service.Services.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -74,6 +76,13 @@ namespace MedicalRecords.Service.Api
             builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.Configure<ApiKeySettings>(builder.Configuration.GetSection("ApiKeySettings"));
 
+            builder.Services.Configure<KafkaConfig>(builder.Configuration.GetSection("Kafka"));
+            builder.Services.AddSingleton(resolver =>
+                resolver.GetRequiredService<IOptions<KafkaConfig>>().Value
+            );
+
+
+            builder.Services.AddHostedService<KafkaUserConsumerService>();
 
             var app = builder.Build();
 
