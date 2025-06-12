@@ -108,12 +108,12 @@ namespace MedicalRecords.Service.Api
             app.UseSwagger();
             app.UseSwaggerUI();
 
+            app.UseCors("AllowAllOrigins");
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseMiddleware<TokenOrApiKeyAuthMiddleware>();
 
             app.UseHttpsRedirection();
 
-            app.UseCors("AllowAllOrigins");
 
             app.UseAuthentication();
             app.UseAuthorization();
