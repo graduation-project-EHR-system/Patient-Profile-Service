@@ -17,10 +17,12 @@ namespace MedicalRecords.Service.Api.Controllers
     public class MedicalRecordsController : ControllerBase
     {
         private readonly IMedicalRecordService _medicalRecordService;
+        private readonly EHRClient _eHRClient;
 
-        public MedicalRecordsController(IMedicalRecordService medicalRecordService)
+        public MedicalRecordsController(IMedicalRecordService medicalRecordService , EHRClient eHRClient)
         {
             _medicalRecordService = medicalRecordService;
+            _eHRClient = eHRClient;
         }
 
         [HttpPost]
@@ -35,6 +37,21 @@ namespace MedicalRecords.Service.Api.Controllers
             {
                 return BadRequest(new ApiResponse(400, "Patient Or Doctor Does not Exist"));
             }
+
+            var record = new MedicalRecordWithHospitalDto
+            {
+                Id = medicalRecordDto.Id,
+                Diagnosis = medicalRecordDto.Diagnosis,
+                Notes = medicalRecordDto.Notes,
+                CreatedAt = medicalRecordDto.CreatedAt,
+                PatientId = medicalRecordDto.PatientId,
+                HospitalId = Guid.Parse("89bfea2a-79aa-46d1-1a78-08dda7936342"),
+                Medications = result.Medications,
+                Conditions = result.Conditions,
+                Observations = result.Observations
+            };
+
+            var Response = await _eHRClient.SendMedicalRecordAsync(record);
 
             return Ok(new ResponseWithData<MedicalRecordDto>(200 , result , "Medical medicalRecord Is Added Successfully"));
         }

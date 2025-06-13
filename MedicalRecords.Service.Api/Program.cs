@@ -1,6 +1,7 @@
 using MedicalRecords.Service.Api.Helper;
 using MedicalRecords.Service.Api.Middlewares;
 using MedicalRecords.Service.Core.DbContexts;
+using MedicalRecords.Service.Core.Dtos;
 using MedicalRecords.Service.Core.Helper;
 using MedicalRecords.Service.Core.ServicesContract;
 using MedicalRecords.Service.Services;
@@ -65,13 +66,15 @@ namespace MedicalRecords.Service.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+           
+            builder.Services.AddHttpClient<EHRClient>();
 
             builder.Services.AddDbContext<MedicalRecordsDbContext>(opt =>
             {
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            
+
             builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
             builder.Services.AddScoped<IPatientService, PatientService>();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
